@@ -1,0 +1,15 @@
+[f, map] = imread('images/tunnel.jpg');
+imshow(f, map), title('Original image');
+h = [0 -1 0; -1 5 -1; 0 -1 0];
+[M,N] = size(f);
+P = 2*M;
+Q = 2*N;
+F=fft2(double(f),P,Q);
+H=fft2(double(h),P,Q);
+F2=H.*F;
+f2=ifft2(F2);
+g=real(f2);
+fsharp=g(1:M,1:N);
+
+whos fsharp;
+figure, imshow(fsharp, map), title('Brighter image');
